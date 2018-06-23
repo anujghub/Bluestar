@@ -15,6 +15,7 @@ t.Subject = 'Hello World';
 t.Status = 'Open';
 t.Priority = 'Normal';
 t.WhatId = Oppty.Id;
+t.WhoID = '';
 insert t;
    
    
