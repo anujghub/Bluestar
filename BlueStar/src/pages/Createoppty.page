@@ -1,0 +1,8 @@
+<apex:page standardController="Account" Showchat="False">
+<br/>
+<Center><Font size ="6" color ="gold">Createe Oppty</font></Center>
+<br/><br/>
+<flow:interview name="Create_Oppty" finishLocation="/{!$CurrentPage.parameters.id}">
+        <apex:param name="VarToAccountyID" value="{!Account.Id}"/>
+    </flow:interview>
+</apex:page>

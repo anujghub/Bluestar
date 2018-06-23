@@ -1,0 +1,7 @@
+<apex:page standardController="Lead" sidebar="true" showHeader="false">
+  <script>
+      var recordId = '{!JSENCODE(Lead.id)}';
+      //alert(recordId);
+  </script>
+  <c:fileupload parentId="{!$CurrentPage.parameters.id}"/>
+</apex:page>

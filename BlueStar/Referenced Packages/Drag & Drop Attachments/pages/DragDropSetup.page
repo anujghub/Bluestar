@@ -1,0 +1,50 @@
+<apex:page controller="draganddrop.DragDropSetupController">
+    <apex:form >
+        <script language="javascript">
+            function ClipBoard(copytextid, holdtextid)
+            {
+                holdtxt = document.getElementById(holdtextid);
+                holdtxt.innerText = document.getElementById(copytextid).innerText;
+                Copied = holdtxt.createTextRange();
+                alert("text in buffer \"" + holdtxt.innerText + "\"");
+                Copied.execCommand("Copy");
+            }
+        </script>
+    
+        <apex:pageBlock >
+            <apex:pageBlockSection id="PBS1" columns="1">
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Select Object"/>
+                    <apex:selectList value="{!selectedObject}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!Objects}"/>
+                        <apex:actionSupport event="onchange" action="{!resetPageMarkup}" rerender="PBS1"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:inputtextArea label="Page Markup" value="{!PageMarkup}" readonly="true" rows="6" style="width:80%" id="pageMarkup"/> 
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Follow these steps:"/>
+                    <apex:outputPanel >
+                        <apex:outputLabel value="Step 1: Select an Object from the list."/><br/>
+                        <apex:outputLabel value="Step 2: Copy entire code from Page Markup text box."/>
+                        <apex:inputtextarea ID="holdtext" STYLE="display:none;"/>
+                        <!-- <apex:commandlink onClick="ClipBoard('{!$Component.copytext}', '{!$Component.holdtext}')" value="Copy to Clipboard"/> --> <br/>
+                        <apex:outputLabel value="Step 3:  Create a new visualforce page:"/>
+                         <ul>                         
+                          <li><a href="/066/e" target = "_blank">[Click Here to Create new visualforce page]. OR</a></li>
+                          <li>Go to Setup --> Develop --> Pages and click on New Button.</li>
+                        </ul> 
+                        <apex:outputLabel value="Step 4: Input following values for the new page:"/><br/>
+                       	<ul>                         
+                         <li>Label : Drag &amp; Drop Area</li>
+                         <li>Name: DragnDropArea{!selectedObjectLocalDisplayName}</li>
+                         <li>Visualforce Markup Body : Paste the text copied from Page Markup text box. </li>
+                        </ul> 
+                        <apex:outputLabel value="Step 5: Save the Page."/><br/>
+                        <apex:outputLabel value="Step 6: Add this visualforce page to {!selectedObjectLocalDisplayName}'s desired page layouts."/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
